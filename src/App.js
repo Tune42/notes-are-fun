@@ -16,12 +16,13 @@ class App extends React.Component {
 
   addCategory = category => {
     const allNotes = this.state.allNotes;
-    // only if category doesn't already exist
-    allNotes[category] = [];
+    if (!allNotes[category]) {
+      allNotes[category] = [];
+    }
     this.setState({
       allNotes : allNotes,
+      selectedCategory : category,
     })
-    // only if category doesn't already exist
   }
 
   switchCategory = category => {
@@ -43,9 +44,28 @@ class App extends React.Component {
   }
 
   removeNote = (index) => {
-    console.log(index);
     const allNotes = this.state.allNotes;
-    allNotes[this.state.selectedCategory].splice(index, index);
+    if (index !== 0) {
+      allNotes[this.state.selectedCategory].splice(index, index);
+    } else {
+      allNotes[this.state.selectedCategory].shift();
+    }
+    this.setState({
+      allNotes : allNotes,
+    })
+  }
+
+  editNoteTitle = (index) => {
+    const allNotes = this.state.allNotes;
+    allNotes[this.state.selectedCategory][index].setTitle('test');
+    this.setState({
+      allNotes : allNotes,
+    })
+  }
+
+  editNoteText = (index) => {
+    const allNotes = this.state.allNotes;
+    allNotes[this.state.selectedCategory][index].setText('test');
     this.setState({
       allNotes : allNotes,
     })

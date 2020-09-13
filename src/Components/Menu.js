@@ -72,32 +72,26 @@ class InputField extends React.Component {
     }
 }
 
-class Menu extends React.Component {
-    constructor(props){
-        super();
-    }
-
-    renderCategories = () => {
+function Menu(props) {
+    const renderCategories = () => {
         const categories = []
-        this.props.categories.forEach(category => {
-            categories.push(<MenuItem key={Math.random()} text={category} switchCategory={this.props.switchCategory} />)
+        props.categories.forEach(category => {
+            categories.push(<MenuItem key={Math.random()} text={category} switchCategory={props.switchCategory} />)
         })
         return categories
     }
 
-    render() {
-        return(
-            <div className='my-menu'>
-                <aside>
-                    <p className="menu-label">Categories</p>
-                    <ul className="menu-list">
-                        {this.renderCategories()}
-                    </ul>
-                </aside>
-                <InputField addCategory={this.props.addCategory} />
-            </div>
-        )
-    }
+    return(
+        <div className='my-menu'>
+            <aside>
+                <p className="menu-label">Categories</p>
+                <ul className="menu-list">
+                    {renderCategories()}
+                </ul>
+            </aside>
+            <InputField addCategory={props.addCategory} />
+        </div>
+    )
 }
 
 export default Menu;
