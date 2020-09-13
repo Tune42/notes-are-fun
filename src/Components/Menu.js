@@ -2,7 +2,7 @@
 import React from 'react';
 
 class MenuItem extends React.Component {
-    constructor(props) {
+    constructor() {
         super();
         this.state={
             activeState : ''
@@ -21,9 +21,15 @@ class MenuItem extends React.Component {
         })
     }
 
+    handleClick = (e) => {
+        e.preventDefault();
+        this.props.switchCategory(this.props.text);
+    }
+
     render() {
         return(
             <li className={this.state.activeState}
+            onClick={this.handleClick}
             onMouseEnter={this.setActive}
             onMouseLeave={this.setInactive}>
             <a>{this.props.text}</a></li>
@@ -32,7 +38,7 @@ class MenuItem extends React.Component {
 }
 
 class InputField extends React.Component {
-    constructor(props){
+    constructor(){
         super()
         this.state={
             value : ''
@@ -47,7 +53,7 @@ class InputField extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.addMenuItem(this.state.value);
+        this.props.addCategory(this.state.value);
         this.setState({
             value : ''
         })
@@ -69,22 +75,14 @@ class InputField extends React.Component {
 class Menu extends React.Component {
     constructor(props){
         super();
-        this.state={
-            menuItems : [],
-        }
     }
 
-    componentDidMount = () => {
-        this.addMenuItem('General');
-    }
-
-    addMenuItem = (text) => {
-        const currentMenuItems = this.state.menuItems;
-        currentMenuItems.push(<MenuItem key={Math.random()} text={text} />)
-        this.setState={
-            menuItems : currentMenuItems,
-        }
-        this.forceUpdate();
+    renderCategories = () => {
+        const categories = []
+        this.props.categories.forEach(category => {
+            categories.push(<MenuItem key={Math.random()} text={category} switchCategory={this.props.switchCategory} />)
+        })
+        return categories
     }
 
     render() {
@@ -93,10 +91,10 @@ class Menu extends React.Component {
                 <aside>
                     <p className="menu-label">Categories</p>
                     <ul className="menu-list">
-                        {this.state.menuItems}
+                        {this.renderCategories()}
                     </ul>
                 </aside>
-                <InputField addMenuItem={this.addMenuItem} />
+                <InputField addCategory={this.props.addCategory} />
             </div>
         )
     }

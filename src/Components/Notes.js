@@ -1,28 +1,52 @@
 import React from 'react';
 
-function Notes() {
-    return(
-        <div className='notes-area'>
-            <Note />
-            <Note />
-        </div>
-    )
-}
+function Note(props) {
+    const handleClick = (e) => {
+        e.preventDefault();
+        props.removeNote(props.index);
+    }
 
-function Note() {
-    return (
+    return(
         <div className='my-note'>
-            <article class="message is-primary">
-                <div class="message-header">
-                    <p>Note Title</p>
-                    <button class="delete" aria-label="delete"></button>
+            <article className="message is-primary">
+                <div className="message-header">
+                    <p>{props.title}</p>
+                    <button onClick={handleClick} className="delete" aria-label="delete"></button>
                 </div>
-                <div class="message-body has-text-black">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+                <div className="message-body has-text-black">
+                    {props.text}
                 </div>
             </article>
         </div>
     )
+}
+
+class Notes extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state={}
+    }
+
+    renderNotes = () => {
+        const notes = []
+        this.props.notes.forEach((note, index) => {
+            notes.push(
+                <Note key={Math.random()} index={index} title={note.getTitle()} text={note.getText()} removeNote={this.props.removeNote} />
+            )
+        })
+        return notes;
+    }
+
+    render() {
+        return(
+            <div className='notes-area'>
+                <h1 className='title my-title'>{this.props.currentCategory}</h1>
+                {this.renderNotes()}
+                <button onClick={() => this.props.addNote(this.props.currentCategory, '', '')} 
+                className='button is-primary my-add-note-button'>Create Note</button>
+            </div>
+        )
+    }
 }
 
 export default Notes;

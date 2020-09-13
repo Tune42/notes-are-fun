@@ -37,7 +37,18 @@ body {
 }
 
 .my-note {
-    margin-top: 25px;
+    margin-top: 15px;
     width: 400px;
     height: 400px;
+}
+
+.my-title {
+    width: 100%;
+    text-align: center;
+}
+
+.my-add-note-button {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
 }
