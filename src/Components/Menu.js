@@ -84,7 +84,7 @@ function Menu(props) {
     return(
         <div className='my-menu'>
             <aside>
-                <p className="menu-label">Categories</p>
+                <p className="menu-label my-menu-label">Categories</p>
                 <ul className="menu-list">
                     {renderCategories()}
                 </ul>

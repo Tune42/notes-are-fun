@@ -3,15 +3,21 @@ import React from 'react';
 import './App.scss';
 import Menu from './Components/Menu.js';
 import Notes from './Components/Notes.js';
-import Note from './Modules/notes.js';
 
 class App extends React.Component {
-  constructor(props){
+  constructor(){
     super();
     this.state={
       allNotes : {},
-      selectedCategory : ''
-    }
+      selectedCategory : '',
+    };
+  }
+
+  componentDidMount = () => {
+    const allNotes = JSON.parse(localStorage.getItem('allNotes'));
+    this.setState({
+      allNotes : allNotes,
+    })
   }
 
   addCategory = category => {
@@ -31,10 +37,22 @@ class App extends React.Component {
     })
   }
 
+  removeCategory = category => {
+    const sure = window.confirm("Are you sure you want to delete this category along with all of its notes?");
+    if (sure) {
+      const allNotes = this.state.allNotes;
+      delete allNotes[category];
+      this.setState({
+        notes : allNotes,
+        selectedCategory : '',
+      })
+    }
+  }
+
   addNote = (category, subject, body) => {
     const allNotes = this.state.allNotes;
     if (allNotes[category]) {
-      allNotes[category].push(Note(subject, body)); 
+      allNotes[category].push([subject, body]); 
     } else {
       alert('Please create/select a category first!');
     }
@@ -55,17 +73,17 @@ class App extends React.Component {
     })
   }
 
-  editNoteTitle = (index) => {
+  editNoteTitle = (index, value) => {
     const allNotes = this.state.allNotes;
-    allNotes[this.state.selectedCategory][index].setTitle('test');
+    allNotes[this.state.selectedCategory][index][0] = value;
     this.setState({
       allNotes : allNotes,
     })
   }
 
-  editNoteText = (index) => {
+  editNoteText = (index, value) => {
     const allNotes = this.state.allNotes;
-    allNotes[this.state.selectedCategory][index].setText('test');
+    allNotes[this.state.selectedCategory][index][1] = value;
     this.setState({
       allNotes : allNotes,
     })
@@ -91,12 +109,18 @@ class App extends React.Component {
     return selectedNotes;
   }
 
+  saveNotes = () => {
+    const allNotes = this.state.allNotes;
+    localStorage.setItem('allNotes', JSON.stringify(allNotes));
+  }
+
   render() {
     return(
       <div className="App">
         <Menu addCategory={this.addCategory} categories={this.getCategories()} switchCategory={this.switchCategory} />
-        <Notes notes={this.getNotes()} addNote={this.addNote} currentCategory={this.state.selectedCategory}
-        removeNote={this.removeNote} />
+        <Notes notes={this.getNotes()} addNote={this.addNote} currentCategory={this.state.selectedCategory} 
+        removeNote={this.removeNote} editNoteTitle={this.editNoteTitle} editNoteText={this.editNoteText} 
+        removeCategory={this.removeCategory} saveNotes={this.saveNotes} />
       </div>
     )
   }

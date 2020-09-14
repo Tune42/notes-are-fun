@@ -1,24 +1,101 @@
 import React from 'react';
 
-function Note(props) {
-    const handleClickDelete = (e) => {
-        e.preventDefault();
-        props.removeNote(props.index);
+class Note extends React.Component {
+    constructor(){
+        super();
+        this.state={
+            editingTitle : false,
+            editingText : false,
+            titleInput : '',
+            textInput : '',
+        }
     }
 
-    return(
-        <div className='my-note'>
-            <article className="message is-primary">
-                <div className="message-header">
-                    <p>{props.title}</p>
-                    <button onClick={handleClickDelete} className="delete" aria-label="delete"></button>
-                </div>
-                <div className="message-body has-text-black">
-                    {props.text}
-                </div>
-            </article>
-        </div>
-    )
+    handleClickDelete = (e) => {
+        e.preventDefault();
+        this.props.removeNote(this.props.index);
+    }
+
+    titleEditToggle = (e) => {
+        e.preventDefault();
+        const editingTitle = this.state.editingTitle;
+        if (this.props.title) {
+            this.setState({
+                titleInput : this.props.title,
+            })
+        }
+        this.setState({
+            editingTitle : !editingTitle,
+        })
+    }
+
+    textEditToggle = (e) => {
+        e.preventDefault();
+        const editingText = this.state.editNoteText;
+        if (this.props.text) {
+            this.setState({
+                textInput : this.props.text
+            })
+        }
+        this.setState({
+            editingText : !editingText
+        })
+    }
+
+    handleTitleChange = (e) => {
+        this.setState({
+            titleInput : e.target.value
+        })
+    }
+
+    handleTitleSubmit = (e) => {
+        e.preventDefault();
+        this.props.editNoteTitle(this.props.index, this.state.titleInput);
+    }
+
+    handleTextChange = (e) => {
+        this.setState({
+            textInput : e.target.value
+        })
+    }
+
+    handleTextSubmit = (e) => {
+        e.preventDefault();
+        this.props.editNoteText(this.props.index, this.state.textInput);
+    }
+
+    render() {
+        return(
+            <div className=''>
+                <article className="message is-primary my-note">
+                    <div className="message-body has-text-black my-message">
+                        <div className='level my-note-title'>
+                            {this.state.editingTitle ? (<form onSubmit={this.handleTitleSubmit}>
+                            <input type="text" onChange={this.handleTitleChange} value={this.state.titleInput}
+                            className="input is-primary is-small" maxLength={50} /></form>) : <p>{this.props.title}</p>}
+                            <div>
+                                <span className="icon">
+                                    <i onClick={this.titleEditToggle} className="fa fa-edit"></i>
+                                </span>
+                                <button onClick={this.handleClickDelete} className="delete" aria-label="delete"></button>
+                            </div>
+                        </div>
+                        {this.state.editingText ? (<textarea onChange={this.handleTextChange} value={this.state.textInput}
+                        className="input is-primary my-text-field" />) : this.props.text}
+                        <p>
+                            {!this.state.editingText ? 
+                            (<span className='icon'>
+                                <i onClick={this.textEditToggle} className='fa fa-edit'></i>
+                            </span>) :
+                            (<span className='icon'>
+                                <i onClick={this.handleTextSubmit} className='fa fa-check'></i>
+                            </span>)}
+                        </p>
+                    </div>
+                </article>
+            </div>
+        )
+    }
 }
 
 function Notes(props) {
@@ -26,18 +103,28 @@ function Notes(props) {
         const notes = []
         props.notes.forEach((note, index) => {
             notes.push(
-                <Note key={Math.random()} index={index} title={note.getTitle()} text={note.getText()} removeNote={props.removeNote} />
+                <Note key={Math.random()} index={index} title={note[0]} text={note[1]} 
+                editNoteTitle={props.editNoteTitle} removeNote={props.removeNote}
+                editNoteText={props.editNoteText} />
             )
         })
         return notes;
     }
 
     return(
-        <div className='notes-area'>
-            <h1 className='title my-title'>{props.currentCategory}</h1>
-            {renderNotes()}
-            <button onClick={() => props.addNote(props.currentCategory, '', '')} 
-            className='button is-primary my-add-note-button'>Create Note</button>
+        <div className='my-notes'>
+            <h1 className='title my-title'>{props.currentCategory}
+                {props.currentCategory !== '' ? 
+                (<span className='icon ml-5'>
+                    <i onClick={() => props.removeCategory(props.currentCategory)} className='fa fa-trash'></i>
+                </span>) : <p>No Category Selected</p>}
+            </h1>
+            <div className='notes-area'>
+                {renderNotes()}
+                <button onClick={props.saveNotes} className='button is-link my-save-notes-button'>Save Notes</button>
+                <button onClick={() => props.addNote(props.currentCategory, 'New Note', 'Click the pencil to edit!')} 
+                className='button is-primary my-add-note-button'>Create Note</button>
+            </div>
         </div>
     )
 }
