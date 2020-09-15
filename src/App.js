@@ -89,15 +89,6 @@ class App extends React.Component {
     })
   }
 
-  getCategories = () => {
-    const allNotes = this.state.allNotes;
-    const categories = []
-    for (const [key, value] of Object.entries(allNotes)) {
-      categories.push(key);
-    }
-    return categories;
-  }
-
   getNotes = () => {
     const allNotes = this.state.allNotes;
     const selectedNotes = []
@@ -117,7 +108,7 @@ class App extends React.Component {
   render() {
     return(
       <div className="App">
-        <Menu addCategory={this.addCategory} categories={this.getCategories()} switchCategory={this.switchCategory} />
+        <Menu addCategory={this.addCategory} categories={Object.keys(this.state.allNotes)} switchCategory={this.switchCategory} />
         <Notes notes={this.getNotes()} addNote={this.addNote} currentCategory={this.state.selectedCategory} 
         removeNote={this.removeNote} editNoteTitle={this.editNoteTitle} editNoteText={this.editNoteText} 
         removeCategory={this.removeCategory} saveNotes={this.saveNotes} />
