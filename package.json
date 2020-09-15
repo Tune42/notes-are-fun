@@ -2,7 +2,7 @@
   "name": "notes-are-fun",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tune42.github.io/notes-are-fun/",
+  "homepage": "http://tune42.github.io/notes-are-fun/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
