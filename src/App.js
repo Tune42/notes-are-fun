@@ -17,9 +17,11 @@ class App extends React.Component {
 
   componentDidMount = () => {
     const allNotes = JSON.parse(localStorage.getItem('allNotes'));
-    this.setState({
-      allNotes : allNotes,
-    })
+    if (allNotes) {
+      this.setState({
+        allNotes : allNotes,
+      })
+    }
   }
 
   addCategory = category => {
