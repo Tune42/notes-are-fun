@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "74fe0a96091df996e61447c241216b7d",
+    "revision": "f26f74f7543d2ef502bbd9dac7b30933",
     "url": "/notes-are-fun/index.html"
   },
   {
-    "revision": "b84f37e56fa0672a2939",
-    "url": "/notes-are-fun/static/css/main.708f5913.chunk.css"
+    "revision": "54613a9140e199501e19",
+    "url": "/notes-are-fun/static/css/main.067a9031.chunk.css"
   },
   {
-    "revision": "30429d46308f5a63db07",
-    "url": "/notes-are-fun/static/js/2.1b556fbd.chunk.js"
+    "revision": "90448a28096cb3f185f4",
+    "url": "/notes-are-fun/static/js/2.a7da8024.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/notes-are-fun/static/js/2.1b556fbd.chunk.js.LICENSE.txt"
+    "url": "/notes-are-fun/static/js/2.a7da8024.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b84f37e56fa0672a2939",
-    "url": "/notes-are-fun/static/js/main.d3e55255.chunk.js"
+    "revision": "54613a9140e199501e19",
+    "url": "/notes-are-fun/static/js/main.bdac3297.chunk.js"
   },
   {
     "revision": "b5078709de533ee9ce49",
