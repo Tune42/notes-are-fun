@@ -113,9 +113,7 @@ class App extends React.Component {
     return(
       <div className="App">
         <Menu addCategory={this.addCategory} categories={Object.keys(this.state.allNotes)} switchCategory={this.switchCategory} />
-        <Notes notes={this.getNotes()} addNote={this.addNote} currentCategory={this.state.selectedCategory} 
-        removeNote={this.removeNote} editNoteTitle={this.editNoteTitle} editNoteText={this.editNoteText} 
-        removeCategory={this.removeCategory} saveNotes={this.saveNotes} />
+        <Notes notes={this.getNotes()} addNote={this.addNote} currentCategory={this.state.selectedCategory} removeNote={this.removeNote} editNoteTitle={this.editNoteTitle} editNoteText={this.editNoteText} removeCategory={this.removeCategory} saveNotes={this.saveNotes} />
       </div>
     )
   }
