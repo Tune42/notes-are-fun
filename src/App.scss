@@ -14,6 +14,7 @@ body {
 .App {
     display: flex;
     margin: 0 auto;
+    min-height: 100vh;
 }
 
 .my-menu {
@@ -25,6 +26,7 @@ body {
     padding: 25px;
     border-right: solid;
     border-width: 5px;
+    position: relative;
 }
 
 .my-menu-label {
@@ -34,7 +36,7 @@ body {
 }
 
 .my-menu-input-field {
-    position: fixed;
+    position: absolute;
     bottom: 25px;
     left: 10px;
     width: 150px;
