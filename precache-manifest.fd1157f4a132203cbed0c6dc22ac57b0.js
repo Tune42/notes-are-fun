@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f26f74f7543d2ef502bbd9dac7b30933",
+    "revision": "5bd798130bfa001877779627dfcf5601",
     "url": "/notes-are-fun/index.html"
   },
   {
-    "revision": "54613a9140e199501e19",
-    "url": "/notes-are-fun/static/css/main.067a9031.chunk.css"
+    "revision": "88a000472466a5133c3d",
+    "url": "/notes-are-fun/static/css/main.2c29c1e3.chunk.css"
   },
   {
     "revision": "90448a28096cb3f185f4",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/notes-are-fun/static/js/2.a7da8024.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "54613a9140e199501e19",
-    "url": "/notes-are-fun/static/js/main.bdac3297.chunk.js"
+    "revision": "88a000472466a5133c3d",
+    "url": "/notes-are-fun/static/js/main.4a1e94e0.chunk.js"
   },
   {
     "revision": "b5078709de533ee9ce49",
