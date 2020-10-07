@@ -107,6 +107,7 @@ class App extends React.Component {
   saveNotes = () => {
     const allNotes = this.state.allNotes;
     localStorage.setItem('allNotes', JSON.stringify(allNotes));
+    alert('Your notes have been saved!');
   }
 
   render() {

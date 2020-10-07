@@ -24,10 +24,9 @@ function Notes(props) {
             </h1>
             <div className='notes-area'>
                 {renderNotes()}
-                <button onClick={props.saveNotes} className='button is-link my-save-notes-button'>Save Notes</button>
-                <button onClick={() => props.addNote(props.currentCategory, 'New Note', 'Click the pencil to edit!')} 
-                className='button is-primary my-add-note-button'>Create Note</button>
             </div>
+            <button onClick={props.saveNotes} className='button is-link my-save-notes-button'>Save Notes</button>
+            <button onClick={() => props.addNote(props.currentCategory, 'New Note', 'Click the pencil to edit!')} className='button is-primary my-add-note-button'>Create Note</button>
         </div>
     )
 }
